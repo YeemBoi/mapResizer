@@ -35,7 +35,7 @@ window.onresize = function ()
 	redoMaps();
 };
 
-function redoMaps(isFirstTime)
+function redoMaps()
 {
 	for (var i=0; i<mapInd; i++)
 	{
