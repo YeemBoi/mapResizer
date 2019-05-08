@@ -22,7 +22,7 @@ window.onload = function ()
 				widths.push(allImages[i].width);
 				areas.push(cMap.getElementsByTagName("AREA"));
 				for (var j in areas[mapInd])
-					ocs[mapInd].push(areas[mapInd].coords.split(",").map(Number)); // the OTHER kind of map
+					ocs[mapInd].push(areas[mapInd][j].coords.split(",").map(Number)); // the OTHER kind of map
 				maps.push(cMap);
 				mapInd++;
 			}
@@ -40,6 +40,6 @@ function redoMaps()
 	for (var i=0; i<mapInd; i++)
 	{
 		for (var j=0; j<areas[i].length; j++)
-			areas[j].coords = ocs[i][j].map(x => x / natWidths[i] * widths[i]);
+			areas[i][j].coords = ocs[i][j].map(x => x / natWidths[i] * widths[i]).join();
 	}
 }
