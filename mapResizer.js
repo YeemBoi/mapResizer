@@ -4,58 +4,42 @@ var ocs = [];
 var natWidths = [];
 var widths = [];
 var areas = [];
+var mapInd = 0;
 
-window.onload = function()
+window.onload = function ()
 {
 	var allImages = document.getElementsByTagName("IMG");
-	var mapInd = 0;
-	for (i=0; i<allImages.length; i++)
+	for (i = 0; i < allImages.length; i++)
 	{
 		if (allImages[i].hasAttribute("USEMAP"))
-    {
+		{
 			var cMap = document.getElementsByName(allImages[i].useMap.slice(1));
-      if (cMap)
-      {
-        cMap = cMap[0];
-        ocs.push([]);
-        natWidths.push(allImages[i].naturalWidth);
-        widths.push(allImages[i].width);
-        areas.push(cMap.getElementsByTagName("AREA"));
-        for (j in areas[mapInd])
-          ocs[mapInd].push(areas[mapInd].coords.split(","));
-        mapInd++;
-      }
+			if (cMap)
+			{
+				cMap = cMap[0];
+				ocs.push([]);
+				natWidths.push(allImages[i].naturalWidth);
+				widths.push(allImages[i].width);
+				areas.push(cMap.getElementsByTagName("AREA"));
+				for (var j in areas[mapInd])
+					ocs[mapInd].push(areas[mapInd].coords.split(",").map(Number)); // the OTHER kind of map
+				maps.push(cMap);
+				mapInd++;
+			}
+		}
+		redoMaps();
 	}
-  redoMaps();
 };
-window.onresize = function(){redoMaps();};
-
-
+window.onresize = function ()
+{
+	redoMaps();
+};
 
 function redoMaps(isFirstTime)
 {
-	for (var i=0; i<mappedImages.length; i++)
+	for (var i=0; i<mapInd; i++)
 	{
-		var cMap = document.getElementsByName(mappedImages[i].useMap.slice(1));
-		if (cMap)
-		{
-			cMap = cMap[0];
-			if (isFirstTime) 
-			var coWidth = mappedImages[i].naturalWidth;
-			var cwWidth = mappedImages[i].width;
-			var cAreas = cMap.getElementsByTagName("AREA");
-			for (var j=0; j<cAreas.length; j++)
-			{
-				var aCoords = cAreas[j].getAttribute("COORDS").split(",");
-				if (isFirstTime) ocs[i].push([]);
-				for (var k=0; k<aCoords.length; k++)
-				{
-					if (isFirstTime)
-						ocs[i][j].push(aCoords[k]);
-					aCoords[k] = (Number(ocs[i][j][k]) / coWidth) * cwWidth;
-				}
-				cAreas[j].setAttribute("COORDS", aCoords.join());
-			}
-		}
+		for (var j=0; j<areas[i].length; j++)
+			areas[j].coords = ocs[i][j].map(x => x / natWidths[i] * widths[i]);
 	}
 }
