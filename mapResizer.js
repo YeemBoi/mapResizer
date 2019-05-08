@@ -21,7 +21,7 @@ window.onload = function ()
 				natWidths.push(allImages[i].naturalWidth);
 				widths.push(allImages[i].width);
 				areas.push(cMap.getElementsByTagName("AREA"));
-				for (var j in areas[mapInd])
+				for (var j=0; j<areas[mapInd].length; j++)
 					ocs[mapInd].push(areas[mapInd][j].coords.split(",").map(Number)); // the OTHER kind of map
 				maps.push(cMap);
 				mapInd++;
