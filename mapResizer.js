@@ -5,11 +5,13 @@ var natWidths = [];
 var widths = [];
 var areas = [];
 var mapInd = 0;
+var i;
+var j;
 
 window.onload = function ()
 {
 	var allImages = document.getElementsByTagName("IMG");
-	for (i = 0; i < allImages.length; i++)
+	for (i=0; i<allImages.length; i++)
 	{
 		if (allImages[i].hasAttribute("USEMAP"))
 		{
@@ -37,9 +39,9 @@ window.onresize = function ()
 
 function redoMaps()
 {
-	for (var i=0; i<mapInd; i++)
+	for (i=0; i<mapInd; i++)
 	{
-		for (var j=0; j<areas[i].length; j++)
+		for (j=0; j<areas[i].length; j++)
 			areas[i][j].coords = ocs[i][j].map(x => x / natWidths[i] * widths[i]).join();
 	}
 }
