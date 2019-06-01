@@ -1,12 +1,6 @@
-var mappedImages = [];
-var maps = [];
-var ocs = [];
-var natWidths = [];
-var widths = [];
-var areas = [];
+var mappedImages = maps = ocs = natWidths = widths = areas = [];
 var mapInd = 0;
-var i;
-var j;
+var i, j;
 
 window.onload = function ()
 {
