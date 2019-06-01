@@ -2,7 +2,7 @@ var mappedImages = maps = ocs = natWidths = widths = areas = [];
 var mapInd = 0;
 var i, j;
 
-window.onload = function ()
+window.onload = function()
 {
 	var allImages = document.getElementsByTagName("IMG");
 	for (i=0; i<allImages.length; i++)
@@ -23,13 +23,10 @@ window.onload = function ()
 				mapInd++;
 			}
 		}
-		redoMaps();
 	}
-};
-window.onresize = function ()
-{
 	redoMaps();
 };
+window.onresize = function() {redoMaps()};
 
 function redoMaps()
 {
