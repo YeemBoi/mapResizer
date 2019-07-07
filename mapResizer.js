@@ -1,5 +1,5 @@
 var mappedImages = maps = ocs = natWidths = widths = areas = [];
-var mapInd = 0;
+var mapI = 0;
 var i, j;
 
 window.onload = function()
@@ -30,7 +30,7 @@ window.onresize = function() {redoMaps()};
 
 function redoMaps()
 {
-	for (i=0; i<mapInd; i++)
+	for (i=0; i<mapI; i++)
 	{
 		for (j=0; j<areas[i].length; j++)
 			areas[i][j].coords = ocs[i][j].map(x => x / natWidths[i] * widths[i]).join();
